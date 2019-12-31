@@ -73,37 +73,37 @@ class WaterLevel:
     def getOnOffState(self):
         return self.powerState
 
+if False:
+    # setup the pin name for ease of use
+    WaterLevel_TRANSISTOR = 17
+    WaterLevel_SENSOR = 27
 
-# setup the pin name for ease of use
-WaterLevel_TRANSISTOR = 17
-WaterLevel_SENSOR = 27
+    # setup the enumeration based on gpio references 
+    GPIO.setmode(GPIO.BCM)
 
-# setup the enumeration based on gpio references 
-GPIO.setmode(GPIO.BCM)
+    # setup the port as output or input
 
-# setup the port as output or input
-
-# setup the state of the port
+    # setup the state of the port
 
 
-# code of protection; if has no problem the block try will keep always on
-try:
-    capteurWaterLevel_1 = WaterLevel(WaterLevel_TRANSISTOR, WaterLevel_SENSOR)
-    while True:
-        capteurWaterLevel_1.turnOnOff()
-        WaterLevelValue = capteurWaterLevel_1.getWaterLevel()
-        if WaterLevelValue == True:
-            print "water detected " 
-            time.sleep(1)
-        elif WaterLevelValue == False:
-            print "water not detected " 
-            time.sleep(1)
-        else:
-            print "sensor poweroff" 
-            time.sleep(1)
+    # code of protection; if has no problem the block try will keep always on
+    try:
+        capteurWaterLevel_1 = WaterLevel(WaterLevel_TRANSISTOR, WaterLevel_SENSOR)
+        while True:
+            capteurWaterLevel_1.turnOnOff()
+            WaterLevelValue = capteurWaterLevel_1.getWaterLevel()
+            if WaterLevelValue == True:
+                print "water detected " 
+                time.sleep(1)
+            elif WaterLevelValue == False:
+                print "water not detected " 
+                time.sleep(1)
+            else:
+                print "sensor poweroff" 
+                time.sleep(1)
 
-# exceptions are anything that interrupt the try block.
-# if a CTRL_C be pressed
-except KeyboardInterrupt:
-# setup the gpio to default values; finish any transmission of energy
-    GPIO.cleanup()
+    # exceptions are anything that interrupt the try block.
+    # if a CTRL_C be pressed
+    except KeyboardInterrupt:
+    # setup the gpio to default values; finish any transmission of energy
+        GPIO.cleanup()
