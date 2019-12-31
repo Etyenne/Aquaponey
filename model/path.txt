@@ -1,0 +1,45 @@
+  SENSORS
+sensor list : temperaturePlant, humidityPlant, luminosityPlant, temperatureWater, conductivityWater, phWater, levelWater, levelFood
+
+path : /sensor/"name" GET() => state of the sensor (on/off)
+path : /sensor/"name" PUT(ON) => power on the sensor (via a transistor) and pause the self executing function
+path : /sensor/"name" PUT(OFF) => power off the sensor (via a transistor) and resume the self executing function
+
+path : /sensor/"name"/value GET() => current sensor value 
+path : /sensor/"name"/value GET(user) => current sensor value (power on the sensor if neccecery [request by user] and then power off)
+path : /sensor/"name"/value GET(start, end) => sensor values between start and end date
+
+path : /sensor/"name"/function GET() => state of the sensor function (on/off)
+path : /sensor/"name"/function PUT(ON) => pause the self executing function
+path : /sensor/"name"/function PUT(OFF) => resume the self executing function
+
+self executing function at regular interval => get value and save it in file/database
+
+
+ACTUATOR
+sensor list : lightPlant, photoPlant, pumpWater, heaterWater, oxygenePumpWater, distributorFood
+
+path : /actuator/"name" GET() => state of the actuator (on/off)
+path : /actuator/"name" PUT(ON) => power on the actuator (via a transistor) and resume the self executing function
+path : /actuator/"name" PUT(OFF) => power off the actuator (via a transistor) and pause the self executing function
+
+path : /actuator/"name"/state GET() => current state/value of action if possible
+path : /actuator/"name"/action GET() => perform the default action 
+path : /actuator/"name"/action GET(user) => perform the default action (power on the actuator if neccecery [request by user] and then power off)
+path : /actuator/"name"/action GET(target) => perform the action until the target is reached
+path : /actuator/"name"/action PUT(mintarget) => change the min target for the default action and the self executing function
+path : /actuator/"name"/action PUT(maxtarget) => change the max target for the default action and the self executing function
+
+path : /actuator/"name"/function GET() => state of the actuator function (on/off)
+path : /actuator/"name"/function PUT(ON) => pause the self executing function
+path : /actuator/"name"/function PUT(OFF) => resume the self executing function
+
+self executing function at regular interval => perform the default action if the min target is reached until the max target is reached
+
+
+MODE
+mode list : economic
+
+path : /mode/"name" GET() => state of the mode (on/off)
+path : /mode/"name" PUT(ON) => activate the mode : power off/on all the affected sensor and pause/resume all affected function
+path : /mode/"name" PUT(OFF) => desactivate the mode : power off/on all the affected sensor and pause/resume all affected function
