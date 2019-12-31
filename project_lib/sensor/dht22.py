@@ -133,12 +133,11 @@ class DHT22:
             return humidity, temperature
 
 if False:
+	# setup the enumeration based on gpio references 1
 	DHT22_SENSOR = 27
 	DHT22_TRANSISTOR = 18
 
 	GPIO.setmode(GPIO.BCM)
-
-	# setup the enumeration based on gpio references 1
 
 	# setup the port as output, in this PIN the energy will go out
 
