@@ -132,37 +132,37 @@ class DHT22:
             self.turnOff()
             return humidity, temperature
 
+if False:
+	DHT22_SENSOR = 27
+	DHT22_TRANSISTOR = 18
 
-DHT22_SENSOR = 27
-DHT22_TRANSISTOR = 18
+	GPIO.setmode(GPIO.BCM)
 
-GPIO.setmode(GPIO.BCM)
+	# setup the enumeration based on gpio references 1
 
-# setup the enumeration based on gpio references 1
-
-# setup the port as output, in this PIN the energy will go out
-
-
-# setup to have energy by the port
+	# setup the port as output, in this PIN the energy will go out
 
 
-# code of protection; if has no problem the block try will keep always on
-try:
-    capteurDHT_1 = DHT22(DHT22_TRANSISTOR, DHT22_SENSOR)
-# infinite loop
-    while True:
-        print "..."
-        print "getting value ..."
-        humidity, temperature = capteurDHT_1.getHumidityAndTemperatureOnce()
-        
-        if humidity is not None and temperature is not None:
-            print 'Temp = {0:0.1f}*C  Humidity = {1:0.1f}%'.format(temperature, humidity)
-        else:
-            print "no value"
-		
+	# setup to have energy by the port
 
-# exceptions are anything that interrupt the try block.
-# if a CTRL_C be pressed
-except KeyboardInterrupt:
-# setup the gpio to default values; finish any transmission of energy
-	GPIO.cleanup()
+
+	# code of protection; if has no problem the block try will keep always on
+	try:
+	    capteurDHT_1 = DHT22(DHT22_TRANSISTOR, DHT22_SENSOR)
+	# infinite loop
+	    while True:
+		print "..."
+		print "getting value ..."
+		humidity, temperature = capteurDHT_1.getHumidityAndTemperatureOnce()
+
+		if humidity is not None and temperature is not None:
+		    print 'Temp = {0:0.1f}*C  Humidity = {1:0.1f}%'.format(temperature, humidity)
+		else:
+		    print "no value"
+
+
+	# exceptions are anything that interrupt the try block.
+	# if a CTRL_C be pressed
+	except KeyboardInterrupt:
+	# setup the gpio to default values; finish any transmission of energy
+		GPIO.cleanup()
