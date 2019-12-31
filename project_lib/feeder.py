@@ -93,35 +93,35 @@ class Feeder:
     def getOnOffState(self):
         return self.powerState
 
+if False:
+    # setup the pin name for ease of use
+    SERVOMOTOR_TRANSISTOR = 27
+    SERVOMOTOR_CONTROL = 18
+    LDR_TRANSISTOR = 17
+    LDR_SENSOR = 22
 
-# setup the pin name for ease of use
-SERVOMOTOR_TRANSISTOR = 27
-SERVOMOTOR_CONTROL = 18
-LDR_TRANSISTOR = 17
-LDR_SENSOR = 22
+    # setup the enumeration based on gpio references 
+    GPIO.setmode(GPIO.BCM)
 
-# setup the enumeration based on gpio references 
-GPIO.setmode(GPIO.BCM)
+    # setup the port as output or input
 
-# setup the port as output or input
-
-# setup the state of the port
+    # setup the state of the port
 
 
-# code of protection; if has no problem the block try will keep always on
-try:
-    feeder1 = Feeder(LDR_TRANSISTOR, LDR_SENSOR, SERVOMOTOR_TRANSISTOR, SERVOMOTOR_CONTROL)
-    feeder1.turnOn()
-    while True:
-        time.sleep(2) # sleep 1 second
-        print "position :", feeder1.servomotor.getAngle()
-        if feeder1.foodStatus() == True:
-            feeder1.feed()
-        else:
-            print "no food"
-        
-# exceptions are anything that interrupt the try block.
-# if a CTRL_C be pressed
-except KeyboardInterrupt:
-# setup the gpio to default values; finish any transmission of energy
-    GPIO.cleanup()
+    # code of protection; if has no problem the block try will keep always on
+    try:
+        feeder1 = Feeder(LDR_TRANSISTOR, LDR_SENSOR, SERVOMOTOR_TRANSISTOR, SERVOMOTOR_CONTROL)
+        feeder1.turnOn()
+        while True:
+            time.sleep(2) # sleep 1 second
+            print "position :", feeder1.servomotor.getAngle()
+            if feeder1.foodStatus() == True:
+                feeder1.feed()
+            else:
+                print "no food"
+
+    # exceptions are anything that interrupt the try block.
+    # if a CTRL_C be pressed
+    except KeyboardInterrupt:
+    # setup the gpio to default values; finish any transmission of energy
+        GPIO.cleanup()
