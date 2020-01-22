@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DHT22</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+  </head>
+
+  <body>
+    <div class="inner">
+      <div id="content">
+        <h1>Temperature</h1>
+
+        <!-- Message display area -->
+
+
+        <div>
+          <button type="button" class="open-button" onclick="getState()">Get power state</button></br>
+          <button type="button" class="open-button" onclick="getHumidity()">Get humidity</button></br>
+          <button type="button" class="open-button" onclick="getTemperature()">Get temperature</button></br>
+          <button type="button" class="open-button" onclick="putOff()">power Off</button></br>
+          <button type="button" class="open-button" onclick="putOn()">power On</button></br>
+         </div>
+      </div>
+    </div>
+    <script>
+      function getState() {
+        $.ajax({
+          type: 'GET',
+          contentType: 'application/json',
+          dataType: 'json',
+          url: '/dht22/power',
+          data: {},
+          success: function (answer, status) {
+            console.log('success : ' + status)
+            console.log('answer : ' + answer)
+            
+            window.alert('The sensor is '+ answer)
+          },
+          error: function (answer, status, error) {
+            console.log('status : ' + status)
+            console.log('error : ' + error)
+            window.alert('The sensor is powered :'+  answer.responseText)
+          },
+          complete: function (answer, status) {}
+        })
+      }
+
+      function getHumidity() {
+        $.ajax({
+          type: 'GET',
+          contentType: 'application/json',
+          dataType: 'json',
+          url: '/dht22/humidity',
+          data: {},
+          success: function (answer, status) {
+            console.log('success : ' + status)
+            window.alert('The humidity is  :'+ answer)
+          },
+          error: function (answer, status, error) {
+            console.log('success : ' + status)
+            window.alert(answer.responseText)
+          },
+          complete: function (answer, status) {}
+        })
+      }
+      
+      function getTemperature() {
+        $.ajax({
+          type: 'GET',
+          contentType: 'application/json',
+          dataType: 'json',
+          url: '/dht22/temperature',
+          data: {},
+          success: function (answer, status) {
+            console.log('success : ' + status)
+            window.alert('The temperature is  :'+ answer)
+          },
+          error: function (answer, status, error) {
+            console.log('success : ' + status)
+            window.alert(answer.responseText)
+          },
+          complete: function (answer, status) {}
+        })
+      }
+
+      function putOff() {
+        $.ajax({
+          type: 'PUT',
+          contentType: 'application/json',
+          dataType: 'json',
+          url: '/dht22/off',
+          data: {},
+          success: function (answer, status) {
+            console.log('success : ' + status)
+            window.alert('The sensor is '+ answer)
+          },
+          error: function (answer, status, error) {
+            console.log('success : ' + status)
+            window.alert('The sensor is powered :'+ answer.responseText)
+          },
+          complete: function (answer, status) {}
+        })
+      }
+
+      function putOn() {
+        $.ajax({
+          type: 'PUT',
+          contentType: 'application/json',
+          dataType: 'json',
+          url: '/dht22/on',
+          data: {},
+          success: function (answer, status) {
+            console.log('success : ' + status)
+            window.alert('The sensor is '+ answer)
+          },
+          error: function (answer, status, error) {
+            console.log('success : ' + status)
+            window.alert('The sensor is powered :'+ answer.responseText)
+          },
+          complete: function (answer, status) {}
+        })
+      }
+
+    </script>
+  </body>
+</html>
