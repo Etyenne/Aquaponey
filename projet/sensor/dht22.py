@@ -10,8 +10,6 @@ import Adafruit_DHT
 
 class DHT22:
     def __init__(self, controlPin, readOutPin):
-        if GPIO.getmode() != 11:
-            GPIO.setmode(GPIO.BCM)
         self.controlPin = controlPin
         self.readOutPin = readOutPin
         self.sensorType = 22
@@ -74,10 +72,13 @@ class DHT22:
             return None
 
     def getTemperature(self):
+        print('get temperature...')
         #check if the sensor is powered on
         if self.powerState == GPIO.HIGH:
             #check the value of the sensor
+            print('get temperature...')
             humidity, temperature = Adafruit_DHT.read_retry(self.sensorType, self.readOutPin)
+            print('get temperature...')
         
             if humidity is not None and temperature is not None:
                 #print 'Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temperature, humidity)

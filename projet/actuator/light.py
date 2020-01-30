@@ -6,8 +6,6 @@ import time
 class Light:
     def __init__(self, controlPin):
         GPIO.setmode(GPIO.BCM)
-        print('light pin :')
-        print(controlPin)
         self.controlPin = controlPin
         # setup the port as output or input
         GPIO.setup(self.controlPin, GPIO.OUT)
@@ -24,8 +22,6 @@ class Light:
             return self.turnOn()
 
     def turnOn(self):
-        print('light pin :')
-        print(self.controlPin)
         #check if the actuator is powered on
         if self.powerState == GPIO.HIGH:
             #the sensor is already powered on

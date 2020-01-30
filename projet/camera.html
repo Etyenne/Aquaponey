@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Camera</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+  </head>
+
+  <body>
+    <div class="inner">
+      <div id="content">
+        <h1>Camera</h1>
+
+        <!-- Message display area -->
+
+
+        <div>
+          <button type="button" class="open-button" onclick="getPreview()">Get picture</button></br>
+           <img id="preview" src="#" alt="view of the system" width="50%"> 
+         </div>
+      </div>
+    </div>
+    <script>
+      function getPreview() {
+        window.alert('It will take a few seconds.')
+        $.ajax({
+          type: 'GET',
+          contentType: 'application/json',
+          dataType: 'text',
+          url: '/camera/picture',
+          data: {},
+          success: function (answer, status) {
+            console.log('success : ' + status)
+            console.log('answer : ' + answer)
+            
+            window.alert('new picture :' + answer)
+            $("#preview").attr("src", answer)
+          },
+          error: function (answer, status, error) {
+            console.log('status : ' + status)
+            console.log('error : ' + error)
+            window.alert(answer.responseText)
+          },
+          complete: function (answer, status) {}
+        })
+      }
+      
+      function updateImage(idImage, path) {
+        $(idImage).src = path
+      }
+
+    </script>
+  </body>
+</html>

@@ -3,12 +3,15 @@
 <html>
   <head>
     <title>Menu</title>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
   </head>
     <body>
       <h1>Menu</h1>
       <ul class="menu">
       <li><a href="/waterlevel.html">Water level</li>
+      <li><a href="/waterTemperature.html">Water temperature</li>
       <li><a href="/light.html">Light</a></li>
       
       <li><a href="/pump.html">Pump</a></li>
@@ -21,6 +24,31 @@
       <li><a href="/food.html">Food</a></li>
       
       <li><a href="/servo.html">Servomotor</a></li>
+      <li><a href="/camera.html">Camera</a></li>
     </ul>
+    <br/>
+    <button type="button" class="open-button" onclick="putAllOff()">power Off all functions</button></br>
+    
+    <script>
+    
+     function putAllOff() {
+        $.ajax({
+          type: 'PUT',
+          contentType: 'application/json',
+          dataType: 'json',
+          url: '/all/off',
+          data: {},
+          success: function (answer, status) {
+            console.log('success : ' + status)
+          },
+          error: function (answer, status, error) {
+            console.log('success : ' + status)
+            window.alert('The sensor is powered :'+ answer.responseText)
+          },
+          complete: function (answer, status) {}
+        })
+      }
+
+    </script>
   </body>
 </html>

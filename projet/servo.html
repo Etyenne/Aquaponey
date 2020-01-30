@@ -69,7 +69,7 @@
       
       function setLow() {
         $.ajax({
-          type: 'GET',
+          type: 'PUT',
           contentType: 'application/json',
           dataType: 'json',
           url: '/servo/low',
@@ -88,7 +88,7 @@
       
       function setHigh() {
         $.ajax({
-          type: 'GET',
+          type: 'PUT',
           contentType: 'application/json',
           dataType: 'json',
           url: '/servo/high',

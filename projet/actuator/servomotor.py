@@ -18,13 +18,15 @@ class Servomotor:
         self.signalPWM = GPIO.PWM(self.signalOutPin, 50)
         
         #initialise position
-        angle = 0
-        dutyCycle = (angle / 18) + 2 
-        self.signalPWM.start(2)
+        angle = 170
+        dutyCycle = (angle / 18) + 2.5 
+        self.signalPWM.start(dutyCycle)
         self.angle = angle
         
         # setup the state of the port
         GPIO.output(self.controlPin, GPIO.LOW)
+        time.sleep(1)
+        self.signalPWM.ChangeDutyCycle(0)
         self.powerState = False
 
     def __del__(self):
@@ -40,20 +42,22 @@ class Servomotor:
             if angle < 0 :
                 angle = 0
             #calculate the value of the duty cycle
-            dutyCycle = (angle / 18) + 2 
+            dutyCycle = (angle / 18) + 2.5 
             self.signalPWM.ChangeDutyCycle(dutyCycle)
             self.angle = angle
+            time.sleep(1)
+            self.signalPWM.ChangeDutyCycle(0)
             return True
         else :
             return False
 
     def setAngleOnce(self, angle):
         #check if it is powered on
-        if self.pwerState == GPIO.HIGH :
-            return self.setAngle(self, angle)
+        if self.powerState == GPIO.HIGH :
+            return self.setAngle(angle)
         else:
             self.turnOn()
-            state = self.setAngle(self, angle)
+            state = self.setAngle(angle)
             self.turnOff()
             return state
 
@@ -86,7 +90,6 @@ class Servomotor:
             return False
         else:
             #power off the actuator
-            GPIO.output(self.controlPin, GPIO.LOW)
             self.powerState = False
             #print "turn off pin :", self.controlPin
             return True

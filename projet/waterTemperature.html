@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DHT22</title>
+    <title>Water temperature</title>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
@@ -10,14 +10,13 @@
   <body>
     <div class="inner">
       <div id="content">
-        <h1>Temperature</h1>
+        <h1>Water temperature</h1>
 
         <!-- Message display area -->
 
 
         <div>
           <button type="button" class="open-button" onclick="getState()">Get power state</button></br>
-          <button type="button" class="open-button" onclick="getHumidity()">Get humidity</button></br>
           <button type="button" class="open-button" onclick="getTemperature()">Get temperature</button></br>
           <button type="button" class="open-button" onclick="putOff()">power Off</button></br>
           <button type="button" class="open-button" onclick="putOn()">power On</button></br>
@@ -30,7 +29,7 @@
           type: 'GET',
           contentType: 'application/json',
           dataType: 'json',
-          url: '/dht22/power',
+          url: '/ds18b20/power',
           data: {},
           success: function (answer, status) {
             console.log('success : ' + status)
@@ -46,32 +45,13 @@
           complete: function (answer, status) {}
         })
       }
-
-      function getHumidity() {
-        $.ajax({
-          type: 'GET',
-          contentType: 'application/json',
-          dataType: 'json',
-          url: '/dht22/humidity',
-          data: {},
-          success: function (answer, status) {
-            console.log('success : ' + status)
-            window.alert('The humidity is  :'+ answer+' %')
-          },
-          error: function (answer, status, error) {
-            console.log('success : ' + status)
-            window.alert(answer.responseText)
-          },
-          complete: function (answer, status) {}
-        })
-      }
       
       function getTemperature() {
         $.ajax({
           type: 'GET',
           contentType: 'application/json',
           dataType: 'json',
-          url: '/dht22/temperature',
+          url: '/ds18b20/temperature',
           data: {},
           success: function (answer, status) {
             console.log('success : ' + status)
@@ -90,7 +70,7 @@
           type: 'PUT',
           contentType: 'application/json',
           dataType: 'json',
-          url: '/dht22/off',
+          url: '/ds18b20/off',
           data: {},
           success: function (answer, status) {
             console.log('success : ' + status)
@@ -109,7 +89,7 @@
           type: 'PUT',
           contentType: 'application/json',
           dataType: 'json',
-          url: '/dht22/on',
+          url: '/ds18b20/on',
           data: {},
           success: function (answer, status) {
             console.log('success : ' + status)
